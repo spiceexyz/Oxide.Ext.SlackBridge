@@ -31,7 +31,9 @@ namespace Oxide.Ext.SlackBridge
                 stream.Read(array, 0, array.Length);
                 Assembly.Load(array);
             }
-
+            
+            pluginServerMap = new Dictionary<CSPlugin, WebServer>();
+            
             var slackChatSync = new SlackChatSync();
             Interface.Oxide.RootPluginManager.AddPlugin(slackChatSync);
             var slackChatSyncServer = new WebServer($"http://*:{slackChatSync.httpListenerPort}{slackChatSync.httpListenerDir}", slackChatSync.HandlePostRequest);
